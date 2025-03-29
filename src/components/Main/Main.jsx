@@ -1,10 +1,10 @@
 import React from "react";
+import WeatherCard from "../WeatherCard/WeatherCard";
 
-function Main(props) {
+function Main({ weatherData, clothingData, clothingItems, onCardClick }) {
   return (
     <main>
-      <h2>Main Component</h2>
-      {/* Your main content goes here */}
+      <WeatherCard weatherData={weatherData} />
     </main>
   );
 }
