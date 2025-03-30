@@ -2,12 +2,9 @@ import React from "react";
 import "./WeatherCard.css";
 
 function WeatherCard({ weatherData }) {
-  if (!weatherData) {
-    return null;
-  }
+  if (!weatherData) return null;
 
-  const { temperature, city, weatherType, weatherCondition, sunrise, sunset } =
-    weatherData;
+  const { temperature, city, weatherCondition, sunrise, sunset } = weatherData;
 
   const currentTime = Date.now() / 1000;
   const isDay = currentTime >= sunrise && currentTime < sunset;
@@ -31,7 +28,6 @@ function WeatherCard({ weatherData }) {
     <section className={`weather-card ${getBackgroundClass()}`}>
       <div className="weather-card__info">
         <p className="weather-card__temp">{temperature}°F</p>
-        <p className="weather-card__city">{city}</p>
       </div>
     </section>
   );
