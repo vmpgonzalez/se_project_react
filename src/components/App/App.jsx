@@ -12,6 +12,11 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
   useEffect(() => {
     getWeatherData().then((data) => {
       if (data) {
@@ -21,9 +26,6 @@ function App() {
 
     setClothingItems(defaultClothingItems);
   }, []);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
 
   const handleCardClick = (item) => {
     setSelectedItem(item);
@@ -35,17 +37,64 @@ function App() {
     setSelectedItem(null);
   };
 
+  const handleAddClick = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const handleCloseAddModal = () => {
+    setIsAddModalOpen(false);
+  };
+
   return (
     <div className="app">
-      <Header weatherData={weatherData} />
+      <Header weatherData={weatherData} onAddClick={handleAddClick} />
+
       <Main
         weatherData={weatherData}
         clothingItems={clothingItems}
         onCardClick={handleCardClick}
       />
+
       <Footer />
+
       {isModalOpen && (
         <ItemModal onClose={handleCloseModal} item={selectedItem} />
+      )}
+
+      {isAddModalOpen && (
+        <ModalWithForm
+          title="Add Garment"
+          name="add"
+          buttonText="Add"
+          onClose={handleCloseAddModal}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleCloseAddModal();
+          }}
+        >
+          <label>
+            Name:
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            Image URL:
+            <input type="url" name="link" required />
+          </label>
+          <label>
+            Select Weather:
+            <div className="modal__radio-group">
+              <label>
+                <input type="radio" name="weather" value="hot" /> Hot
+              </label>
+              <label>
+                <input type="radio" name="weather" value="warm" /> Warm
+              </label>
+              <label>
+                <input type="radio" name="weather" value="cold" /> Cold
+              </label>
+            </div>
+          </label>
+        </ModalWithForm>
       )}
     </div>
   );
