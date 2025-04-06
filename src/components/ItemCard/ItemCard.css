@@ -1,27 +1,49 @@
 .item-card {
-  list-style: none;
+  background-color: #f3f3f3;
+  border: 1px solid #d1d1d1;
+  border-radius: 12px; /* 👈 Rounded corners */
+  width: 300px;
+  height: 328px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 20px;
+  box-sizing: border-box;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease;
+  flex: 1 1 calc(33.333% - 16px);
 }
 
 .item-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .item-card__image {
-  width: 328px;
-  height: 328px;
-  object-fit: cover;
-  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 16px;
 }
 
 .item-card__name {
-  margin-top: 10px;
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
+  background-color: #fff;
   color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .item-card {
+    flex: 1 1 calc(50% - 16px); /* 2 per row on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .item-card {
+    flex: 1 1 100%; /* 1 per row on phones */
+  }
 }

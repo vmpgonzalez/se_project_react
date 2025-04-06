@@ -2,33 +2,23 @@ import React from "react";
 import "./WeatherCard.css";
 
 function WeatherCard({ weatherData }) {
-  if (!weatherData) return null;
+  if (!weatherData) {
+    return <div className="weather-card">Loading weather...</div>;
+  }
 
-  const { temperature, city, weatherCondition, sunrise, sunset } = weatherData;
+  const { temperature, weatherCondition, sunrise, sunset } = weatherData;
 
-  const currentTime = Date.now() / 1000;
+  const currentTime = Date.now() / 1000; // in seconds
   const isDay = currentTime >= sunrise && currentTime < sunset;
 
-  const getBackgroundClass = () => {
-    const condition = weatherCondition.toLowerCase();
+  const weatherKey = weatherCondition.toLowerCase();
+  const dayNight = isDay ? "day" : "night";
 
-    if (condition.includes("clear")) {
-      return isDay ? "weather-clear-day" : "weather-clear-night";
-    } else if (condition.includes("cloud")) {
-      return isDay ? "weather-cloudy-day" : "weather-cloudy-night";
-    } else if (condition.includes("rain")) {
-      return "weather-rainy";
-    } else if (condition.includes("snow")) {
-      return "weather-snowy";
-    }
-    return "weather-default";
-  };
+  const cardClass = `weather-card weather-card--${weatherKey}-${dayNight}`;
 
   return (
-    <section className={`weather-card ${getBackgroundClass()}`}>
-      <div className="weather-card__info">
-        <p className="weather-card__temp">{temperature}°F</p>
-      </div>
+    <section className={cardClass}>
+      <p className="weather-card__temp">{temperature}°F</p>
     </section>
   );
 }

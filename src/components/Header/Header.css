@@ -2,10 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32px 40px 16px;
   max-width: 1360px;
-  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  margin: 32px auto 0;
+  padding: 0 40px;
   font-family: "Cabinet Grotesk", sans-serif;
+  box-sizing: border-box;
 }
 
 .header__left {
@@ -15,16 +18,23 @@
 }
 
 .header__logo {
-  width: 90px;
-  height: auto;
+  width: 89px;
+  height: 40px;
 }
 
-.header__date-location {
-  font-size: 16px;
-  font-weight: 500;
-  color: #131313;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+.header__center {
+  display: flex;
+  flex-direction: row; /* ✅ Changed to row to keep date + city on same line */
+  align-items: center;
+  gap: 12px; /* Space between date and city */
+}
+
+.header__date,
+.header__location {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #000;
 }
 
 .header__right {
@@ -34,20 +44,21 @@
 }
 
 .header__button {
-  background-color: #000;
-  color: #fff;
+  font-size: 20px;
   font-weight: 700;
-  font-size: 14px;
-  padding: 8px 16px;
+  line-height: 20px;
+  background: none;
   border: none;
-  border-radius: 4px;
-  text-transform: uppercase;
   cursor: pointer;
+  color: #000;
+  padding: 0;
 }
 
 .header__username {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 100%;
+  color: #000;
 }
 
 .header__avatar {
@@ -55,5 +66,38 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  vertical-align: middle;
+}
+
+/* ✅ Responsive styles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 0 24px;
+  }
+
+  .header__center {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .header__right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .header__logo {
+    width: 72px;
+    height: auto;
+  }
+
+  .header__date,
+  .header__location,
+  .header__username,
+  .header__button {
+    font-size: 18px;
+  }
 }
