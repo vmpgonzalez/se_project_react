@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { defaultClothingItems } from "../../utils/defaultClothingItems";
 import { getWeatherData } from "../../utils/weatherApi";
 
 import Header from "../Header/Header";
-import Main from "../Main/Main";
+import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
@@ -45,8 +45,9 @@ function App() {
     setIsAddModalOpen(false);
   };
 
+  // ✅ THE RETURN GOES *HERE*, INSIDE THE FUNCTION
   return (
-    <div className="app">
+    <div className="page">
       <Header weatherData={weatherData} onAddClick={handleAddClick} />
 
       <Main

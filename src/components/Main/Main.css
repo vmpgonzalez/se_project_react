@@ -1,44 +1,20 @@
 .main {
-  padding: 32px 40px;
-  max-width: 1360px;
-  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .main__text {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
-  margin: 0 0 20px 60px;
+  line-height: 20px;
+  color: #000;
+  margin: 24px 0 16px;
 }
 .main__clothing-list {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  padding: 0;
   list-style: none;
-  padding: 0;
   margin: 0;
-}
-
-.main__clothing-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 0 60px;
-}
-
-.card__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
-  padding: 0;
-  margin: 0 60px;
-}
-
-.clothing-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 16px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 16px;
 }

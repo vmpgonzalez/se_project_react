@@ -5,7 +5,6 @@ import ItemCard from "../ItemCard/ItemCard";
 
 function Main({ weatherData, clothingItems, onCardClick }) {
   const temperature = weatherData?.temperature;
-
   const weatherType = weatherData?.weatherType;
 
   const filteredItems = clothingItems.filter(
