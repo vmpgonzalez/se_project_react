@@ -1,24 +1,39 @@
 # WTWR - What to Wear 🌤️🧥
 
-This is the front-end React application for the **WTWR (What to Wear)** project. It allows users to view clothing recommendations based on the current weather in their location.
+**WTWR (What to Wear)** is a front-end React application that provides clothing suggestions based on live weather conditions. Users can browse items suited for the current weather, view details, and add new garments.
 
 ## 📌 Features
 
-- ✅ Real-time weather integration using OpenWeather API
-- ✅ Dynamic WeatherCard with responsive backgrounds (sunny, cloudy, rain, etc.)
-- ✅ Clothing cards filtered by weather type (hot, warm, cold)
-- ✅ Modal for viewing clothing item details
-- ✅ Modal for adding new clothing items
-- ✅ Adaptive layout (desktop & mobile)
-- ✅ ESC key, outside click, and button support to close modals
+- 🌡️ Real-time weather data from the OpenWeather API
+- 🧥 Dynamic weather-based clothing suggestions (hot, warm, cold)
+- 🌤️ Responsive WeatherCard with background changes (sunny, cloudy, rain, etc.)
+- 🔍 Item detail modal with full image and info
+- ➕ Modal to add new garments with weather categories
+- 💡 ESC key, outside click, and close button support for modals
+- 📱 Adaptive design for desktop and mobile screens
 
 ## 🧪 Tech Stack
 
-- **React + Vite**
-- CSS (with Figma-based styling)
-- OpenWeather API
-- GitHub Pages for deployment
+- ⚛️ **React + Vite**
+- 🎨 CSS (Figma-based custom styling)
+- 🌐 OpenWeather API
+- 🚀 GitHub Pages for deployment
+
+## 📸 Design
+
+This project was built to match the official Figma design provided in the Sprint 10 brief. It follows responsive best practices and design system spacing (32px top, 40px sides, 24px bottom).
 
 ## 🌐 Live Demo
 
-[🔗 View Deployed App](https://vmpgonzalez.github.io/se_project_react/)
+👉 [**View the Deployed App**](https://vmpgonzalez.github.io/se_project_react/)
+
+## 📁 Getting Started (Optional)
+
+To run locally:
+
+```bash
+git clone https://github.com/vmpgonzalez/se_project_react.git
+cd se_project_react
+npm install
+npm run dev
+```
