@@ -1,13 +1,14 @@
 .weather-card {
+  position: relative;
+  width: 100%;
   max-width: 1360px;
-  margin: 0 auto 40px;
-  height: 80px;
+  margin: 28px auto 40px; /* Top: 28px, Left/Right: auto (center), Bottom: 40px */
   display: flex;
+  height: 80px;
   align-items: center;
-  padding: 0 40px;
   border-radius: 12px;
   box-sizing: border-box;
-  background-size: cover;
+  background-size: contain;
   background-position: center top;
   background-repeat: no-repeat;
   color: white;
@@ -15,6 +16,16 @@
   font-weight: bold;
   font-family: "Cabinet Grotesk", sans-serif;
   transition: background-image 0.3s ease;
+  aspect-ratio: 6 / 1;
+}
+
+.weather-card__temp {
+  position: absolute;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  padding: 20px 0px 20px 16px;
 }
 /* 🎯 Dynamic Weather Backgrounds */
 .weather-card--clouds-day {
@@ -78,8 +89,16 @@
   }
 
   .weather-card__temp {
-    font-size: 20px;
-    font-weight: bold;
-    margin: auto 0;
+    font-family: "Cabinet Grotesk";
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    width: 69px;
+    height: 40px;
+    top: 120px;
+    left: 56px;
+    background: #ffffff;
   }
 }
