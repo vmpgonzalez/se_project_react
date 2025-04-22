@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./ModalWithForm.css";
+import closeIcon from "../../assets/close-button-grey.png"; // ✅ adjust path if needed
 
 function ModalWithForm({
   name,
@@ -27,8 +28,13 @@ function ModalWithForm({
       <div className="modal__overlay" onClick={onClose}></div>
 
       <div className="modal__content">
-        <button className="modal__close" type="button" onClick={onClose}>
-          ✕
+        <button
+          className="modal__close"
+          type="button"
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          <img src={closeIcon} alt="Close" className="modal__close-icon" />
         </button>
 
         <h2 className="modal__title">{title}</h2>

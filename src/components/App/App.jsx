@@ -64,25 +64,27 @@ function App() {
 
       {isAddModalOpen && (
         <ModalWithForm
-          title="Add Garment"
+          title="New Garment"
           name="add"
-          buttonText="Add"
+          buttonText="Add garment"
           onClose={handleCloseAddModal}
           onSubmit={(e) => {
             e.preventDefault();
             handleCloseAddModal();
           }}
         >
-          <label>
-            Name:
-            <input type="text" name="name" required />
+          <label className="modal__label modal__label-name">
+            Name
+            <input type="text" name="name" required placeholder="Name" />
           </label>
-          <label>
-            Image URL:
-            <input type="url" name="link" required />
+
+          <label className="modal__label modal__label-image">
+            Image
+            <input type="url" name="link" required placeholder="Image URL" />
           </label>
-          <label>
-            Select Weather:
+
+          <label className="modal__label">
+            Select the weather type:
             <div className="modal__radio-group">
               <label>
                 <input type="radio" name="weather" value="hot" /> Hot

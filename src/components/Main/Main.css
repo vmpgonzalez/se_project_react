@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  flex: 1;
 }
 
 .main__text {
@@ -12,7 +13,7 @@
   font-size: 20px;
   line-height: 100%;
   letter-spacing: 0%;
-  margin: 0px 0px 28px 0;
+  margin: 0px 0px 34px 0;
 }
 .main__clothing-list {
   display: flex;
