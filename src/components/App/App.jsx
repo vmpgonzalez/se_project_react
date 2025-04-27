@@ -64,7 +64,7 @@ function App() {
 
       {isAddModalOpen && (
         <ModalWithForm
-          title="New Garment"
+          title="New garment"
           name="add"
           buttonText="Add garment"
           onClose={handleCloseAddModal}

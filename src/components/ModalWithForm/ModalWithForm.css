@@ -24,14 +24,13 @@
 .modal__content {
   position: relative;
   background-color: white;
-  padding: 32px;
+  padding: 28px 28px 36px 28px;
   border-radius: 16px;
   width: 496px;
   max-width: 90%;
   z-index: 20;
   box-sizing: border-box;
   font-family: "Cabinet Grotesk", sans-serif;
-  padding: 28px 28px 36px 28px;
 }
 
 .modal__close {
@@ -50,15 +49,17 @@
 }
 
 .modal__title {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
-  margin: 0px 0px 24px 0px;
+  margin: 0 0 24px 0;
+  text-transform: none;
 }
 
 .modal__form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: flex-start;
 }
 
 .modal__form label {
@@ -66,20 +67,25 @@
   flex-direction: column;
   align-items: flex-start;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
+  margin-bottom: 0;
+  width: 100%;
+  font-family: "Cabinet Grotesk", sans-serif;
 }
 
 .modal__form input[type="text"],
 .modal__form input[type="url"] {
-  padding: 0;
+  width: 100%; /* ✅ Stretch input */
+  padding: 0px 0 2px 0;
+  margin: 0;
   border: none;
   border-bottom: 1px solid #000;
   font-size: 16px;
   height: 40px;
   background-color: transparent;
   font-family: "Cabinet Grotesk", sans-serif;
-  width: 100%;
   box-sizing: border-box;
+  line-height: 20px;
 }
 
 .modal__form input::placeholder {
@@ -90,7 +96,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 12px;
   align-items: flex-start;
 }
 
@@ -104,30 +110,48 @@
   flex-direction: row;
 }
 
+.modal__radio-group input[type="radio"] {
+  margin: 0;
+  width: 16px; /* ✅ Set width */
+  height: 16px; /* ✅ Set height */
+  appearance: none; /* ✅ Remove default browser style */
+  border: 2px solid #000; /* ✅ Black border */
+  border-radius: 50%; /* ✅ Make it a perfect circle */
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.modal__radio-group input[type="radio"]:checked {
+  background-color: #000; /* ✅ Fill center black when selected */
+  border: 2px solid #000;
+}
+
 .modal__submit {
-  margin-top: 16px;
-  padding: 12px;
   background-color: #000;
   color: #fff;
   font-size: 16px;
   font-weight: 600;
+  padding: 8px 16px; /* ✅ Hugs text properly */
+  height: 36px; /* ✅ Hug height */
+  width: auto; /* ✅ Hug width */
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  height: 48px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  text-transform: none; /* ✅ No uppercase */
+  letter-spacing: 0;
+  margin-top: 16px;
+  text-align: center;
+  font-family: "Cabinet Grotesk", sans-serif;
 }
 
 .modal__submit:hover {
   background-color: #444;
 }
 
-.modal__radio-group input[type="radio"] {
-  margin: 0;
-}
-
+/* Fine control over label -> input spacing */
 .modal__label {
   display: flex;
   flex-direction: column;
@@ -136,7 +160,7 @@
   font-weight: 500;
 }
 
-/* 👇 Controls spacing between label and input */
+/* Specific controls for gap between label and input */
 .modal__label-name input {
   margin-top: 8px;
 }

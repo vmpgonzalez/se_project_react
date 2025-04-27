@@ -65,9 +65,12 @@
   font-weight: 700;
   margin-bottom: 12px;
   color: #000;
+  font-family: "Cabinet Grotesk", sans-serif;
 }
 
 .modal__item-weather {
-  font-size: 16px;
+  font-size: 20px;
   color: #000;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
 }
