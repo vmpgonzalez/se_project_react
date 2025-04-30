@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { defaultClothingItems } from "../../utils/defaultClothingItems";
 import { getWeatherData } from "../../utils/weatherApi";
-
 import Header from "../Header/Header";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import "../../App.css";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
