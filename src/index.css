@@ -1,5 +1,5 @@
 @import url("./vendor/fonts.css");
-
+@import url("./components/App/App.css");
 body,
 html {
   font-family: "Cabinet Grotesk", sans-serif;
