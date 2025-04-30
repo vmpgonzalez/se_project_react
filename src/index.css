@@ -1,6 +1,5 @@
 @import url("./vendor/fonts.css");
 
-/* index.css — global styles */
 body,
 html {
   font-family: "Cabinet Grotesk", sans-serif;
@@ -29,10 +28,4 @@ html {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-}
-
-@media (max-width: 768px) {
-  .page {
-    padding: 24px 16px;
-  }
 }

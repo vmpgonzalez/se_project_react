@@ -8,7 +8,7 @@ function WeatherCard({ weatherData }) {
 
   const { temperature, weatherCondition, sunrise, sunset } = weatherData;
 
-  const currentTime = Date.now() / 1000; // in seconds
+  const currentTime = Date.now() / 1000;
   const isDay = currentTime >= sunrise && currentTime < sunset;
 
   const weatherKey = weatherCondition.toLowerCase();

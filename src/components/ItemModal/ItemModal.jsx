@@ -1,6 +1,6 @@
 import React from "react";
 import "./ItemModal.css";
-import closeIcon from "../../assets/close-button.png"; // ✅ Adjust the path if needed
+import closeIcon from "../../assets/close-button.png";
 
 function ItemModal({ item, onClose }) {
   if (!item) return null;
@@ -23,7 +23,7 @@ function ItemModal({ item, onClose }) {
           alt={item.name}
           className="modal__item-image"
           onError={(e) => {
-            e.target.src = "/fallback.jpg"; // Optional fallback
+            e.target.src = "/fallback.jpg";
             e.target.alt = "Image failed to load";
           }}
         />

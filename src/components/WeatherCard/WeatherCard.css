@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   max-width: 1360px;
-  margin: 28px auto 40px; /* Top: 28px, Left/Right: auto (center), Bottom: 40px */
+  margin: 28px auto 40px;
   display: flex;
   height: 80px;
   align-items: center;
@@ -27,7 +27,7 @@
   margin: 0;
   padding: 20px 0px 20px 16px;
 }
-/* 🎯 Dynamic Weather Backgrounds */
+
 .weather-card--clouds-day {
   background-image: url("/se_project_react/weather/cloudy-day.jpg");
 }
@@ -74,31 +74,4 @@
 
 .weather-card--thunderstorm-night {
   background-image: url("/se_project_react/weather/storm-night.jpg");
-}
-
-/* ✅ Make it mobile responsive */
-@media (max-width: 600px) {
-  .weather-card {
-    height: 60px;
-    font-size: 20px;
-    padding: 0 16px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: right top;
-    border-radius: 12px;
-  }
-
-  .weather-card__temp {
-    font-family: "Cabinet Grotesk";
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 40px;
-    letter-spacing: 0%;
-    vertical-align: middle;
-    width: 69px;
-    height: 40px;
-    top: 120px;
-    left: 56px;
-    background: #ffffff;
-  }
 }

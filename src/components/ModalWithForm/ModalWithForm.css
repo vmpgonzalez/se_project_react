@@ -75,7 +75,7 @@
 
 .modal__form input[type="text"],
 .modal__form input[type="url"] {
-  width: 100%; /* ✅ Stretch input */
+  width: 100%;
   padding: 0px 0 2px 0;
   margin: 0;
   border: none;
@@ -112,11 +112,11 @@
 
 .modal__radio-group input[type="radio"] {
   margin: 0;
-  width: 16px; /* ✅ Set width */
-  height: 16px; /* ✅ Set height */
-  appearance: none; /* ✅ Remove default browser style */
-  border: 2px solid #000; /* ✅ Black border */
-  border-radius: 50%; /* ✅ Make it a perfect circle */
+  width: 16px;
+  height: 16px;
+  appearance: none;
+  border: 2px solid #000;
+  border-radius: 50%;
   outline: none;
   cursor: pointer;
   background-color: transparent;
@@ -124,7 +124,7 @@
 }
 
 .modal__radio-group input[type="radio"]:checked {
-  background-color: #000; /* ✅ Fill center black when selected */
+  background-color: #000;
   border: 2px solid #000;
 }
 
@@ -133,14 +133,14 @@
   color: #fff;
   font-size: 16px;
   font-weight: 600;
-  padding: 8px 16px; /* ✅ Hugs text properly */
-  height: 36px; /* ✅ Hug height */
-  width: auto; /* ✅ Hug width */
+  padding: 8px 16px;
+  height: 36px;
+  width: auto;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  text-transform: none; /* ✅ No uppercase */
+  text-transform: none;
   letter-spacing: 0;
   margin-top: 16px;
   text-align: center;
@@ -151,7 +151,6 @@
   background-color: #444;
 }
 
-/* Fine control over label -> input spacing */
 .modal__label {
   display: flex;
   flex-direction: column;
@@ -160,26 +159,10 @@
   font-weight: 500;
 }
 
-/* Specific controls for gap between label and input */
 .modal__label-name input {
   margin-top: 8px;
 }
 
 .modal__label-image input {
   margin-top: 3px;
-}
-
-@media (max-width: 520px) {
-  .modal__content {
-    width: 90%;
-    padding: 24px;
-  }
-
-  .modal__title {
-    font-size: 20px;
-  }
-
-  .modal__submit {
-    font-size: 14px;
-  }
 }

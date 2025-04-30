@@ -1,5 +1,5 @@
 .item-card {
-  position: relative; /* required for absolute label */
+  position: relative;
   width: 325px;
   height: 328px;
   background-color: #e9e9e9;

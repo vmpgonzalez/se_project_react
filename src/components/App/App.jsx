@@ -44,8 +44,6 @@ function App() {
   const handleCloseAddModal = () => {
     setIsAddModalOpen(false);
   };
-
-  // ✅ THE RETURN GOES *HERE*, INSIDE THE FUNCTION
   return (
     <div className="page">
       <Header weatherData={weatherData} onAddClick={handleAddClick} />
