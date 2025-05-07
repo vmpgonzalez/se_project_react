@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ItemModal.css";
 import closeIcon from "../../assets/close-button.png";
 
 function ItemModal({ item, onClose }) {
+  useEffect(() => {
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [onClose]);
+
   if (!item) return null;
 
   return (

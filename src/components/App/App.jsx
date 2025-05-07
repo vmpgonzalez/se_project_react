@@ -10,29 +10,31 @@ import ItemModal from "../ItemModal/ItemModal";
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   useEffect(() => {
-    getWeatherData().then((data) => {
-      if (data) {
-        setWeatherData(data);
-      }
-    });
+    getWeatherData()
+      .then((data) => {
+        if (data) {
+          setWeatherData(data);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to load weather data:", err);
+      });
 
     setClothingItems(defaultClothingItems);
   }, []);
 
-  const handleCardClick = (item) => {
+  const handleOpenItemModal = (item) => {
     setSelectedItem(item);
-    setIsModalOpen(true);
+    setIsItemModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleCloseItemModal = () => {
+    setIsItemModalOpen(false);
     setSelectedItem(null);
   };
 
@@ -43,6 +45,7 @@ function App() {
   const handleCloseAddModal = () => {
     setIsAddModalOpen(false);
   };
+
   return (
     <div className="page">
       <Header weatherData={weatherData} onAddClick={handleAddClick} />
@@ -50,13 +53,13 @@ function App() {
       <Main
         weatherData={weatherData}
         clothingItems={clothingItems}
-        onCardClick={handleCardClick}
+        onCardClick={handleOpenItemModal}
       />
 
       <Footer />
 
-      {isModalOpen && (
-        <ItemModal onClose={handleCloseModal} item={selectedItem} />
+      {isItemModalOpen && (
+        <ItemModal onClose={handleCloseItemModal} item={selectedItem} />
       )}
 
       {isAddModalOpen && (
