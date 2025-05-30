@@ -9,19 +9,23 @@ export const getWeatherData = async () => {
   }
   const data = await response.json();
 
-  const temperature = Math.round(data.main.temp);
+  const temperatureF = Math.round(data.main.temp);
+  const temperatureC = Math.round((temperatureF - 32) * (5 / 9));
   const city = data.name;
   const weatherCondition = data.weather[0].main;
   const sunrise = data.sys.sunrise;
   const sunset = data.sys.sunset;
 
   return {
-    temperature,
+    temperature: {
+      F: temperatureF,
+      C: temperatureC,
+    },
     city,
     weatherCondition,
     sunrise,
     sunset,
-    weatherType: defineWeatherType(temperature),
+    weatherType: defineWeatherType(temperatureF),
   };
 };
 

@@ -1,4 +1,4 @@
-.modal {
+.form-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   z-index: 1000;
 }
 
-.modal__overlay {
+.form-modal__overlay {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -21,7 +21,7 @@
   z-index: 10;
 }
 
-.modal__content {
+.form-modal__content {
   position: relative;
   background-color: white;
   padding: 28px 28px 36px 28px;
@@ -33,7 +33,7 @@
   font-family: "Cabinet Grotesk", sans-serif;
 }
 
-.modal__close {
+.form-modal__close {
   position: absolute;
   top: 24px;
   right: 24px;
@@ -48,21 +48,21 @@
   cursor: pointer;
 }
 
-.modal__title {
+.form-modal__title {
   font-size: 16px;
   font-weight: 700;
   margin: 0 0 24px 0;
   text-transform: none;
 }
 
-.modal__form {
+.form-modal__form {
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
 }
 
-.modal__form label {
+.form-modal__form label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -73,8 +73,8 @@
   font-family: "Cabinet Grotesk", sans-serif;
 }
 
-.modal__form input[type="text"],
-.modal__form input[type="url"] {
+.form-modal__form input[type="text"],
+.form-modal__form input[type="url"] {
   width: 100%;
   padding: 0px 0 2px 0;
   margin: 0;
@@ -88,11 +88,11 @@
   line-height: 20px;
 }
 
-.modal__form input::placeholder {
+.form-modal__form input::placeholder {
   color: #999;
 }
 
-.modal__radio-group {
+.form-modal__radio-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -100,7 +100,7 @@
   align-items: flex-start;
 }
 
-.modal__radio-group label {
+.form-modal__radio-group label {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -110,7 +110,7 @@
   flex-direction: row;
 }
 
-.modal__radio-group input[type="radio"] {
+.form-modal__radio-group input[type="radio"] {
   margin: 0;
   width: 16px;
   height: 16px;
@@ -123,12 +123,12 @@
   transition: background-color 0.3s, border 0.3s;
 }
 
-.modal__radio-group input[type="radio"]:checked {
+.form-modal__radio-group input[type="radio"]:checked {
   background-color: #000;
   border: 2px solid #000;
 }
 
-.modal__submit {
+.form-modal__submit {
   background-color: #000;
   color: #fff;
   font-size: 16px;
@@ -147,11 +147,11 @@
   font-family: "Cabinet Grotesk", sans-serif;
 }
 
-.modal__submit:hover {
+.form-modal__submit:hover {
   background-color: #444;
 }
 
-.modal__label {
+.form-modal__label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -159,10 +159,10 @@
   font-weight: 500;
 }
 
-.modal__label-name input {
+.form-modal__label-name input {
   margin-top: 8px;
 }
 
-.modal__label-image input {
+.form-modal__label-image input {
   margin-top: 3px;
 }

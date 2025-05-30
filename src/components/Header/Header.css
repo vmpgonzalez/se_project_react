@@ -72,6 +72,8 @@
   padding: 0;
   margin-top: 8px;
   margin-bottom: 7px;
+  color: black;
+  text-decoration: none;
 }
 .header__avatar {
   width: 40px;
@@ -81,4 +83,13 @@
   margin-top: 8px;
   margin-bottom: 7px;
   margin-left: -8px;
+}
+
+.header__profile-link {
+  text-decoration: none;
+}
+.header__profile {
+  display: flex;
+  align-items: center;
+  gap: 22px;
 }

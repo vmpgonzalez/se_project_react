@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { defaultClothingItems } from "../../utils/defaultClothingItems";
 import { getWeatherData } from "../../utils/weatherApi";
 import Header from "../Header/Header";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import AddItemModal from "../AddItemModal/AddItemModal";
+import Profile from "../Profile/Profile";
+import { Routes, Route, HashRouter } from "react-router-dom";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import {
+  getClothingItems,
+  addClothingItem,
+  deleteClothingItem,
+} from "../../utils/api.js";
+import DeleteConfirmationModal from "../DeleteConfirmationModal.jsx/DeleteConfirmationModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -13,6 +21,9 @@ function App() {
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   useEffect(() => {
     getWeatherData()
@@ -25,7 +36,13 @@ function App() {
         console.error("Failed to load weather data:", err);
       });
 
-    setClothingItems(defaultClothingItems);
+    getClothingItems()
+      .then((items) => {
+        setClothingItems(items);
+      })
+      .catch((err) => {
+        console.error("Failed to load clothing items:", err);
+      });
   }, []);
 
   const handleOpenItemModal = (item) => {
@@ -46,60 +63,102 @@ function App() {
     setIsAddModalOpen(false);
   };
 
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
+  };
+
+  const handleAddItemSubmit = (newItem) => {
+    addClothingItem(newItem)
+      .then((createdItem) => {
+        setClothingItems([createdItem, ...clothingItems]);
+      })
+      .catch((err) => {
+        console.error("Error adding item:", err);
+      });
+  };
+
+  // ✅ Moved outside to make accessible
+  const openConfirmModal = (item) => {
+    setItemToDelete(item);
+    setIsConfirmModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (!itemToDelete) return;
+    deleteClothingItem(itemToDelete._id)
+      .then(() => {
+        setClothingItems((prev) =>
+          prev.filter((item) => item._id !== itemToDelete._id)
+        );
+        setSelectedItem(null);
+        setIsItemModalOpen(false);
+      })
+      .catch((err) => console.error("Error deleting item:", err))
+      .finally(() => {
+        setIsConfirmModalOpen(false);
+        setItemToDelete(null);
+      });
+  };
+
   return (
-    <div className="page">
-      <Header weatherData={weatherData} onAddClick={handleAddClick} />
+    <HashRouter>
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      >
+        <div className="page">
+          <Header weatherData={weatherData} onAddClick={handleAddClick} />
 
-      <Main
-        weatherData={weatherData}
-        clothingItems={clothingItems}
-        onCardClick={handleOpenItemModal}
-      />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  clothingItems={clothingItems}
+                  onCardClick={handleOpenItemModal}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  clothingItems={clothingItems}
+                  onCardClick={handleOpenItemModal}
+                  onAddClick={handleAddClick}
+                />
+              }
+            />
+          </Routes>
 
-      <Footer />
+          <Footer />
 
-      {isItemModalOpen && (
-        <ItemModal onClose={handleCloseItemModal} item={selectedItem} />
-      )}
+          {isItemModalOpen && (
+            <ItemModal
+              item={selectedItem}
+              onClose={handleCloseItemModal}
+              onDelete={openConfirmModal}
+            />
+          )}
 
-      {isAddModalOpen && (
-        <ModalWithForm
-          title="New garment"
-          name="add"
-          buttonText="Add garment"
-          onClose={handleCloseAddModal}
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleCloseAddModal();
-          }}
-        >
-          <label className="modal__label modal__label-name">
-            Name
-            <input type="text" name="name" required placeholder="Name" />
-          </label>
+          {isAddModalOpen && (
+            <AddItemModal
+              isOpen={isAddModalOpen}
+              onCloseModal={handleCloseAddModal}
+              onAddItem={handleAddItemSubmit}
+            />
+          )}
 
-          <label className="modal__label modal__label-image">
-            Image
-            <input type="url" name="link" required placeholder="Image URL" />
-          </label>
-
-          <label className="modal__label">
-            Select the weather type:
-            <div className="modal__radio-group">
-              <label>
-                <input type="radio" name="weather" value="hot" /> Hot
-              </label>
-              <label>
-                <input type="radio" name="weather" value="warm" /> Warm
-              </label>
-              <label>
-                <input type="radio" name="weather" value="cold" /> Cold
-              </label>
-            </div>
-          </label>
-        </ModalWithForm>
-      )}
-    </div>
+          {isConfirmModalOpen && (
+            <DeleteConfirmationModal
+              isOpen={isConfirmModalOpen}
+              onClose={() => setIsConfirmModalOpen(false)}
+              onConfirm={handleConfirmDelete}
+            />
+          )}
+        </div>
+      </CurrentTemperatureUnitContext.Provider>
+    </HashRouter>
   );
 }
 
