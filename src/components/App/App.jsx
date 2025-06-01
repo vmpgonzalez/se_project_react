@@ -66,18 +66,17 @@ function App() {
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
-
   const handleAddItemSubmit = (newItem) => {
     addClothingItem(newItem)
       .then((createdItem) => {
         setClothingItems([createdItem, ...clothingItems]);
+        setIsAddModalOpen(false); //
       })
       .catch((err) => {
         console.error("Error adding item:", err);
       });
   };
 
-  // ✅ Moved outside to make accessible
   const openConfirmModal = (item) => {
     setItemToDelete(item);
     setIsConfirmModalOpen(true);
@@ -92,14 +91,11 @@ function App() {
         );
         setSelectedItem(null);
         setIsItemModalOpen(false);
-      })
-      .catch((err) => console.error("Error deleting item:", err))
-      .finally(() => {
         setIsConfirmModalOpen(false);
         setItemToDelete(null);
-      });
+      })
+      .catch((err) => console.error("Error deleting item:", err));
   };
-
   return (
     <HashRouter>
       <CurrentTemperatureUnitContext.Provider

@@ -17,7 +17,6 @@ function AddItemModal({ isOpen, onCloseModal, onAddItem }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddItem({ name, link, weather });
-    onCloseModal();
   };
 
   return (

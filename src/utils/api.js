@@ -1,13 +1,16 @@
 const baseUrl = "http://localhost:3001/items";
 
-// GET /items
-export const getClothingItems = () => {
-  return fetch(baseUrl).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-  );
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Error: ${res.status}`);
 };
 
-// POST /items
+export const getClothingItems = () => {
+  return fetch(baseUrl).then(checkResponse);
+};
+
 export const addClothingItem = ({ name, link, weather }) => {
   return fetch(baseUrl, {
     method: "POST",
@@ -15,18 +18,11 @@ export const addClothingItem = ({ name, link, weather }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, link, weather }),
-  }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-  );
+  }).then(checkResponse);
 };
 
 export const deleteClothingItem = (id) => {
   return fetch(`${baseUrl}/${id}`, {
     method: "DELETE",
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res;
-  });
+  }).then(checkResponse);
 };
