@@ -1,56 +1,89 @@
-import React, { useEffect } from "react";
+// src/components/ItemModal/ItemModal.jsx
+import React, { useEffect, useContext } from "react";
 import "./ItemModal.css";
-import closeIcon from "../../assets/close-button.png";
+import closeIconGrey from "../../assets/close-button-grey.svg";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
+// component: item modal
 function ItemModal({ item, onClose, onDelete }) {
-  useEffect(() => {
-    const handleEscClose = (e) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
+  // state: current user
+  const currentUser = useContext(CurrentUserContext);
 
-    document.addEventListener("keydown", handleEscClose);
-    return () => {
-      document.removeEventListener("keydown", handleEscClose);
-    };
+  // effect: close on ESC
+  useEffect(() => {
+    const onEsc = (e) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onEsc);
+    return () => document.removeEventListener("keydown", onEsc);
   }, [onClose]);
 
+  // guard: no item
   if (!item) return null;
 
-  return (
-    <div className="item-modal">
-      <div className="item-modal__overlay" onClick={onClose}></div>
+  // prep: image + ownership
+  const src = item.imageUrl || item.link;
+  const isOwn =
+    currentUser &&
+    (typeof item.owner === "string"
+      ? item.owner === currentUser._id
+      : item.owner?._id === currentUser._id);
 
-      <div className="item-modal__content">
+  // ui: modal layout
+  return (
+    <div className="item-modal" onClick={onClose}>
+      {/* ui: overlay */}
+      <div className="item-modal__overlay" />
+
+      {/* ui: modal content */}
+      <div
+        className="item-modal__content"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
+        {/* ui: close button */}
         <button
           className="item-modal__close"
+          type="button"
+          aria-label="Close"
           onClick={onClose}
-          aria-label="Close item modal"
         >
-          <img src={closeIcon} alt="Close" className="item-modal__close-icon" />
+          <img
+            src={closeIconGrey}
+            alt="Close"
+            className="item-modal__close-icon"
+          />
         </button>
 
-        <img
-          src={item.link}
-          alt={item.name}
-          className="item-modal__image"
-          onError={(e) => {
-            e.target.src = "/fallback.jpg";
-            e.target.alt = "Image failed to load";
-          }}
-        />
+        {/* ui: image block */}
+        <div className="item-modal__image-wrap">
+          <img
+            src={src}
+            alt={item.name}
+            className="item-modal__image"
+            onError={(e) => {
+              e.currentTarget.src =
+                "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+              console.warn("Modal image failed to load for", item);
+            }}
+          />
+        </div>
 
-        <div className="item-modal__info">
-          <div className="item-modal__header">
+        {/* ui: info section */}
+        <div className="item-modal__bar">
+          <div className="item-modal__top-row">
             <p className="item-modal__name">{item.name}</p>
-            <button
-              className="item-modal__delete"
-              onClick={() => onDelete(item)}
-            >
-              Delete item
-            </button>
+
+            {isOwn && (
+              <button
+                type="button"
+                className="item-modal__delete"
+                onClick={() => onDelete(item)}
+              >
+                Delete item
+              </button>
+            )}
           </div>
+
           <p className="item-modal__weather">Weather: {item.weather}</p>
         </div>
       </div>

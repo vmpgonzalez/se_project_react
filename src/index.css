@@ -1,30 +1,38 @@
 @import url("./vendor/fonts.css");
-body,
-html {
-  font-family: "Cabinet Grotesk", sans-serif;
+
+/* Make border-box global so padding never surprises you */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
   margin: 0;
-  padding: 0;
-  background-color: #f3f3f3;
-  color: #000;
-  box-sizing: border-box;
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  background: #f3f3f3;
+  color: #000;
+  font-family: "Cabinet Grotesk", sans-serif;
+
+  /* You don't need flex here; keep it simple */
+  display: block;
 }
 
-.page {
-  flex: 1;
-  display: flex;
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 32px 40px 24px;
-  box-sizing: border-box;
-  width: 100%;
-  flex-direction: column;
-}
-
+/* Root stretches full height */
 #root {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+}
+
+/* Page = Figma frame: 1440 wide with 40px gutters ⇒ content = 1360 */
+.page {
+  width: 100%;
+  max-width: 1440px; /* NOT 1360 — this is the key change */
+  margin: 0 auto; /* center the 1440 frame */
+  padding: 32px 40px 24px; /* 40px gutters -> 1360 content width */
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
 }

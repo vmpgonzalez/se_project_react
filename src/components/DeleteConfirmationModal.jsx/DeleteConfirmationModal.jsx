@@ -1,41 +1,72 @@
 // src/components/DeleteConfirmationModal/DeleteConfirmationModal.jsx
 import React, { useEffect } from "react";
+import "../ModalWithForm/ModalWithForm.css";
 import "./DeleteConfirmationModal.css";
-import closeIcon from "../../assets/close-button.png";
+import closeIcon from "../../assets/close-button-grey.svg";
 
-function DeleteConfirmationModal({ isOpen, onClose, onConfirm }) {
+// component: delete confirmation modal
+function DeleteConfirmationModal({
+  isOpen,
+  onClose,
+  onConfirm,
+  isLoading = false,
+}) {
+  // effect: close on ESC key
   useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === "Escape") onClose();
-    };
+    const handleEsc = (e) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", handleEsc);
     return () => document.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
+  // early exit: hidden modal
   if (!isOpen) return null;
 
+  // ui: modal layout
   return (
-    <div className="modal modal_type_confirm">
-      <div className="modal__overlay" onClick={onClose}></div>
-      <div className="modal__content modal__content_confirm">
-        <button className="modal__close" onClick={onClose}>
-          <img src={closeIcon} alt="Close" className="modal__close-icon" />
+    <div
+      className="form-modal form-modal--confirm"
+      role="dialog"
+      aria-modal="true"
+    >
+      {/* ui: overlay */}
+      <div className="form-modal__overlay" onClick={onClose} />
+
+      {/* ui: modal content */}
+      <div className="form-modal__content form-modal__content--confirm">
+        {/* ui: close button */}
+        <button
+          className="form-modal__close"
+          type="button"
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          <img src={closeIcon} alt="" className="form-modal__close-icon" />
         </button>
-        <h2 className="modal__title">
+
+        {/* ui: title + subtitle */}
+        <h2 className="form-modal__title form-modal__title--center">
           Are you sure you want to delete this item?
-          <br />
-          <span className="modal__subtitle">This action is irreversible.</span>
+          <span className="form-modal__subtitle">
+            This action is irreversible.
+          </span>
         </h2>
-        <div className="modal__actions">
+
+        {/* ui: action buttons */}
+        <div className="form-modal__actions form-modal__actions--stack">
           <button
-            className="modal__button modal__button_confirm"
+            type="button"
+            className="form-modal__link-danger"
             onClick={onConfirm}
+            disabled={isLoading}
           >
-            Yes, delete
+            {isLoading ? "Deleting…" : "Yes, delete item"}
           </button>
+
           <button
-            className="modal__button modal__button_cancel"
+            type="button"
+            className="form-modal__alt form-modal__alt--dark"
             onClick={onClose}
+            disabled={isLoading}
           >
             Cancel
           </button>

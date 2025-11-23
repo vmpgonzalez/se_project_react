@@ -1,3 +1,4 @@
+/* ui: footer layout */
 .footer {
   display: flex;
   justify-content: space-between;
@@ -11,6 +12,8 @@
   box-sizing: border-box;
   width: 100%;
 }
+
+/* ui: text + year */
 .footer__text,
 .footer__year {
   margin: 0;

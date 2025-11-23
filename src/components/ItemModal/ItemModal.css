@@ -1,106 +1,119 @@
+/* ui: modal root layer */
 .item-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  font-family: "Cabinet Grotesk", sans-serif;
 }
 
 .item-modal__overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
 }
 
+/* ui: modal box */
 .item-modal__content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   width: 498px;
-  background-color: transparent;
+  height: 610px;
+  background: #fff;
   border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  font-family: "Cabinet Grotesk", sans-serif;
-  box-shadow: none;
+  display: flex;
+  flex-direction: column;
 }
 
+/* ui: close button */
 .item-modal__close {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
+  top: 16px;
+  right: 16px;
   border: none;
-  font-size: 24px;
-  font-weight: 400;
   cursor: pointer;
-  color: white;
-  z-index: 3;
+  padding: 0;
+  z-index: 5;
+  background: none;
 }
 
 .item-modal__close-icon {
-  width: 20px;
-  height: 20px;
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #fff);
+}
+
+/* ui: top image block */
+.item-modal__image-wrap {
+  width: 100%;
+  height: 498px;
+  flex: 0 0 498px;
+  background: #f5f5f5;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .item-modal__image {
   width: 100%;
-  height: 498px;
-  object-fit: cover;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  height: 100%;
+  object-fit: contain;
   display: block;
 }
 
-.item-modal__info {
-  background-color: white;
-  padding: 20px 32px;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+.item-modal__image-wrap--cover .item-modal__image {
+  object-fit: cover;
+  object-position: center;
 }
 
-.item-modal__name {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #000;
+/* ui: bottom info bar */
+.item-modal__bar {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 32px 32px;
+  background: #ffffff;
 }
 
-.item-modal__weather {
-  font-size: 20px;
-  color: #000;
-  font-weight: 700;
-}
-
-.item-modal__delete {
-  background: none;
-  border: none;
-  color: #ff4d00;
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  text-align: right;
-  line-height: 20px;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-.item-modal__delete:hover {
-  background-color: rgba(255, 0, 0, 0.1);
-}
-
-.item-modal__header {
+/* ui: name + delete row */
+.item-modal__top-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+}
+
+/* ui: text styles */
+.item-modal__name,
+.item-modal__weather {
+  margin: 0;
+  color: #000;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* ui: delete button */
+.item-modal__delete {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ff4d00;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  transition: opacity 0.15s ease;
+}
+
+.item-modal__delete:hover {
+  opacity: 0.8;
+  text-decoration: none;
 }

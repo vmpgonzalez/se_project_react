@@ -1,38 +1,62 @@
-.clothes-section {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.clothes-section__header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 16px;
+/* styles: clothes section root */
+.clothes {
+  width: 100%;
 }
 
-.clothes-section__title {
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-  color: #000;
+/* ui: header row */
+.clothes__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 20px;
+}
+
+/* ui: section title */
+.clothes__title {
   margin: 0;
-}
-.clothes-section__add-button {
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-size: 20px;
   font-weight: 700;
+  font-size: 20px;
   line-height: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
   color: #000;
-  padding: 0;
 }
-.clothes-section__grid {
+
+/* ui: add button */
+.clothes__add {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  color: #000;
+  opacity: 0.7;
+}
+.clothes__add:hover {
+  opacity: 1;
+}
+
+/* ui: card grid */
+.clothes__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  width: 100%;
-  padding: 0px;
+}
+
+/* responsive: 2 columns */
+@media (max-width: 1100px) {
+  .clothes__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* responsive: 1 column */
+@media (max-width: 720px) {
+  .clothes__grid {
+    grid-template-columns: 1fr;
+  }
 }
