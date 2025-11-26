@@ -13,7 +13,7 @@ function DeleteConfirmationModal({
 }) {
   // effect: close on ESC key
   useEffect(() => {
-    const handleEsc = (e) => e.key === "Escape" && onClose();
+    const handleEsc = (event) => event.key === "Escape" && onClose();
     document.addEventListener("keydown", handleEsc);
     return () => document.removeEventListener("keydown", handleEsc);
   }, [onClose]);

@@ -29,33 +29,27 @@ import * as auth from "../../utils/auth";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-// app root
 function App() {
-  // state: weather + clothing
   const [weatherData, setWeatherData] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
 
-  // state: modals
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
-  // state: temperature + user auth
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authReady, setAuthReady] = useState(false);
   const [busy, setBusy] = useState(false);
 
-  // state: auth modals + errors
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isEditOpen, setEditOpen] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
-  // effect: load weather + public items on mount
   useEffect(() => {
     getWeatherData()
       .then((data) => data && setWeatherData(data))
@@ -66,7 +60,6 @@ function App() {
       .catch((err) => console.error("Failed to load clothing items:", err));
   }, []);
 
-  // effect: check JWT on mount
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (!token) {
@@ -87,7 +80,6 @@ function App() {
       .finally(() => setAuthReady(true));
   }, []);
 
-  // ui handlers
   const handleOpenItemModal = (item) => {
     setSelectedItem(item);
     setIsItemModalOpen(true);
@@ -101,7 +93,6 @@ function App() {
   const handleToggleSwitchChange = () =>
     setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
 
-  // auth handlers
   const handleRegister = useCallback(
     async ({ name, avatar, email, password }) => {
       try {
@@ -158,7 +149,6 @@ function App() {
     setLoginError(null);
   }, []);
 
-  // item handlers: add item
   const handleAddItemSubmit = (newItem) => {
     const token = localStorage.getItem("jwt");
     if (!token) {
@@ -179,13 +169,11 @@ function App() {
       .catch((err) => console.error("Error adding item:", err));
   };
 
-  // item handlers: open delete modal
   const openConfirmModal = (item) => {
     setItemToDelete(item);
     setIsConfirmModalOpen(true);
   };
 
-  // item handlers: delete item
   const handleConfirmDelete = () => {
     if (!itemToDelete) return;
     const token = localStorage.getItem("jwt");
@@ -206,7 +194,6 @@ function App() {
       .catch((err) => console.error("Error deleting item:", err));
   };
 
-  // item handlers: like toggle
   const handleCardLike = useCallback(({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     if (!token) {
@@ -222,24 +209,28 @@ function App() {
       .catch((err) => console.error("Like error:", err));
   }, []);
 
-  // item handlers: update profile
+  // REQUIRED FIX BELOW ⬇⬇⬇
   const handleUpdateProfile = useCallback(({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
     if (!token) return;
     setBusy(true);
     updateUser({ name, avatar }, token)
-      .then((user) => {
-        setCurrentUser(user);
+      .then((updated) => {
+        // FIX: Preserve _id and all existing fields
+        setCurrentUser((prevUser) => ({
+          ...prevUser,
+          name: updated.name,
+          avatar: updated.avatar,
+        }));
         setEditOpen(false);
       })
       .catch((e) => alert(e.message))
       .finally(() => setBusy(false));
   }, []);
+  // REQUIRED FIX ABOVE ⬆⬆⬆
 
-  // context: current user value
   const currentUserValue = useMemo(() => currentUser, [currentUser]);
 
-  // ui: full app layout
   return (
     <HashRouter>
       <CurrentUserContext.Provider value={currentUserValue}>
@@ -247,7 +238,6 @@ function App() {
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <div className="page">
-            {/* ui: header */}
             <Header
               weatherData={weatherData}
               onAddClick={handleAddClick}
@@ -264,7 +254,6 @@ function App() {
               onOpenEditProfile={() => setEditOpen(true)}
             />
 
-            {/* ui: routing */}
             <Routes>
               <Route
                 path="/"
@@ -305,7 +294,6 @@ function App() {
 
             <Footer />
 
-            {/* ui: modals */}
             {isItemModalOpen && (
               <ItemModal
                 item={selectedItem}
@@ -330,7 +318,6 @@ function App() {
               />
             )}
 
-            {/* ui: auth modals */}
             <RegisterModal
               isOpen={isRegisterOpen}
               onClose={() => setRegisterOpen(false)}

@@ -1,38 +1,24 @@
-// utils/auth.js (or wherever this lives)
+// src/utils/auth.js
 import { API_BASE_URL } from "./config";
+import { checkResponse } from "./checkResponse";
 
-const handleJSON = async (res) => {
-  let data = null;
-  try {
-    data = await res.json();
-  } catch {
-    data = null;
-  }
-
-  if (!res.ok) {
-    const err = new Error(data?.message || `HTTP ${res.status}`);
-    err.status = res.status; // <-- add status
-    err.payload = data; // <-- optional: pass server body
-    throw err;
-  }
-
-  return data;
-};
-
+// Sign up
 export const signup = ({ name, avatar, email, password }) =>
   fetch(`${API_BASE_URL}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, avatar, email, password }),
-  }).then(handleJSON);
+  }).then(checkResponse);
 
+// Sign in
 export const signin = ({ email, password }) =>
   fetch(`${API_BASE_URL}/signin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
-  }).then(handleJSON);
+  }).then(checkResponse);
 
+// Validate token and load user data
 export const checkToken = (token) =>
   fetch(`${API_BASE_URL}/users/me`, {
     method: "GET",
@@ -40,4 +26,4 @@ export const checkToken = (token) =>
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then(handleJSON);
+  }).then(checkResponse);

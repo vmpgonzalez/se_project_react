@@ -1,6 +1,6 @@
-import { APIkey, location } from "./constants";
+import { apiKey, location } from "./constants";
 
-const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=imperial&appid=${APIkey}`;
+const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=imperial&appid=${apiKey}`;
 
 export const getWeatherData = async () => {
   const response = await fetch(API_URL);

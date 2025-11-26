@@ -1,39 +1,71 @@
 # WTWR - What to Wear 🌤️🧥
 
-**WTWR (What to Wear)** is a front-end React application that provides clothing suggestions based on live weather conditions. Users can browse items suited for the current weather, view details, and add new garments.
+A full-stack weather-based clothing recommendation app
+
+**WTWR (What to Wear)** is a front-end React application that integrates with a custom Express + MongoDB backend. The app provides clothing suggestions based on live weather data, allows users to register and log in, create their own clothing items, like/dislike items, and remove their own items.
+
+This project was completed as part of the TripleTen Software Engineering Program.
+
+---
 
 ## 📌 Features
 
-- 🌡️ Real-time weather data from the OpenWeather API
-- 🧥 Dynamic weather-based clothing suggestions (hot, warm, cold)
-- 🌤️ Responsive WeatherCard with background changes (sunny, cloudy, rain, etc.)
-- 🔍 Item detail modal with full image and info
-- ➕ Modal to add new garments with weather categories
-- 💡 ESC key, outside click, and close button support for modals
-- 📱 Adaptive design for desktop and mobile screens
+### 🌦️ Weather + Recommendations
 
-## 🧪 Tech Stack
+- Live weather data from **OpenWeather API**
+- Weather-based clothing suggestions: **hot**, **warm**, **cold**
+- Dynamic WeatherCard backgrounds (sunny, cloudy, rainy, etc.)
+- Temperature toggle (°F / °C)
 
-- ⚛️ **React + Vite**
-- 🎨 CSS (Figma-based custom styling)
-- 🌐 OpenWeather API
-- 🚀 GitHub Pages for deployment
+### 👤 User Accounts
 
-## 📸 Design
+- Register, login, logout
+- Secure token storage via **localStorage**
+- Protected routes and user-specific UI
+- Profile editing with persistent user data
 
-This project was built to match the official Figma design provided in the Sprint 10 brief. It follows responsive best practices and design system spacing (32px top, 40px sides, 24px bottom).
+### 👕 Clothing Items
+
+- Add new clothing items with category + image
+- View full details in item modal
+- Like / unlike clothing items (authenticated users only)
+- Delete only your own items
+- Real-time UI updates based on user identity
+- Like button **hidden** when logged out
+
+### 🧰 UI / UX
+
+- ESC key, overlay click, and close button logic for all modals
+
+---
+
+## 🛠️ Tech Stack
+
+### **Frontend**
+
+- React + Vite
+- React Router
+- Context API
+- Custom API utilities + single `checkResponse` validator
+- CSS modules + custom styling
+
+### **Backend**
+
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT Authentication
+- User routes, auth routes, and clothing item routes
+
+---
+
+## 🗄️ Backend Repository (Required)
+
+👉 **Backend Repo:**  
+https://github.com/vmpgonzalez/se_project_express
+
+---
 
 ## 🌐 Live Demo
 
-👉 [**View the Deployed App**](https://vmpgonzalez.github.io/se_project_react/)
-
-## 📁 Getting Started (Optional)
-
-To run locally:
-
-```bash
-git clone https://github.com/vmpgonzalez/se_project_react.git
-cd se_project_react
-npm install
-npm run dev
-```
+👉 **Deployed Frontend:**  
+https://vmpgonzalez.github.io/se_project_react/

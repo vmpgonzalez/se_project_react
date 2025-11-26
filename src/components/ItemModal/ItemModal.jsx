@@ -11,9 +11,9 @@ function ItemModal({ item, onClose, onDelete }) {
 
   // effect: close on ESC
   useEffect(() => {
-    const onEsc = (e) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onEsc);
-    return () => document.removeEventListener("keydown", onEsc);
+    const handleEsc = (event) => event.key === "Escape" && onClose();
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
   // guard: no item
@@ -36,7 +36,7 @@ function ItemModal({ item, onClose, onDelete }) {
       {/* ui: modal content */}
       <div
         className="item-modal__content"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         role="dialog"
         aria-modal="true"
       >
@@ -60,8 +60,8 @@ function ItemModal({ item, onClose, onDelete }) {
             src={src}
             alt={item.name}
             className="item-modal__image"
-            onError={(e) => {
-              e.currentTarget.src =
+            onError={(event) => {
+              event.currentTarget.src =
                 "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
               console.warn("Modal image failed to load for", item);
             }}

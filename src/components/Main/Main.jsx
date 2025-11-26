@@ -28,12 +28,14 @@ function Main({
 
   // helper: check liked items
   const isItemLikedByMe = (item) => {
-    const me = currentUser?._id;
-    if (!me) return false;
+    const currentUserId = currentUser?._id;
+    if (!currentUserId) return false;
 
     const likes = Array.isArray(item.likes) ? item.likes : [];
-    return likes.some((u) =>
-      typeof u === "string" ? u === me : u?._id === me
+    return likes.some((liker) =>
+      typeof liker === "string"
+        ? liker === currentUserId
+        : liker?._id === currentUserId
     );
   };
 
